@@ -81,7 +81,7 @@ Call this method to show the keyboard.
 Keyboard.show();
 ```
 
-### Keyboard.setResizeMode (for iOS only)  
+### Keyboard.setResizeMode (for iOS)  
 > Programmatically set the resize mode
 
   Call the method with parameter to set the resize mode.  
@@ -92,6 +92,14 @@ Keyboard.setResizeMode('native'); 
 Keyboard.setResizeMode('body'); 
 Keyboard.setResizeMode('ionic'); 
 ```
+
+### Keyboard.setResizeMode (for Android)  
+```js 
+// Possible values are
+Keyboard.setResizeMode('pan|nothing|unspecified|resize');
+```
+
+Default: resize
 
 ## Properties
 

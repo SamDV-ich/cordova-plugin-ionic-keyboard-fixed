@@ -9,11 +9,13 @@ import org.apache.cordova.PluginResult.Status;
 import org.json.JSONArray;
 import org.json.JSONException;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Rect;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 
 // import additionally required classes for calculating screen height
@@ -29,6 +31,7 @@ public class IonicKeyboard extends CordovaPlugin {
         super.initialize(cordova, webView);
     }
 
+    @Override
     public boolean execute(String action, JSONArray args, final CallbackContext callbackContext) throws JSONException {
         if ("hide".equals(action)) {
             cordova.getThreadPool().execute(new Runnable() {
@@ -56,10 +59,43 @@ public class IonicKeyboard extends CordovaPlugin {
             });
             return true;
         }
+        if ("setResizeMode".equals(action)) {
+            cordova.getActivity().runOnUiThread(new Runnable() {
+                String arg = args.getString(0).toLowerCase();
+                @Override
+                public void run() {
+                    int inputPan;
+
+                    switch (arg) {
+                        case "pan":
+                            inputPan = WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN;
+                            break;
+                        case "nothing":
+                            inputPan = WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING;
+                            break;
+                        case "resize":
+                            inputPan = WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE;
+                            break;
+                        case "unspecified":
+                        default:
+                            inputPan = WindowManager.LayoutParams.SOFT_INPUT_ADJUST_UNSPECIFIED;
+                    }
+
+                    Activity activity = cordova.getActivity();
+
+                    if (activity != null) {
+                        activity.getWindow().setSoftInputMode(inputPan);
+                    }
+
+                    callbackContext.success(); // Thread-safe.
+                }
+            });
+            return true;
+        }
         if ("init".equals(action)) {
             cordova.getThreadPool().execute(new Runnable() {
                 public void run() {
-                	//calculate density-independent pixels (dp)
+                    //calculate density-independent pixels (dp)
                     //http://developer.android.com/guide/practices/screens_support.html
                     DisplayMetrics dm = new DisplayMetrics();
                     cordova.getActivity().getWindowManager().getDefaultDisplay().getMetrics(dm);
@@ -104,13 +140,13 @@ public class IonicKeyboard extends CordovaPlugin {
                                 callbackContext.sendPluginResult(result);
                             }
                             else if ( pixelHeightDiff != previousHeightDiff && ( previousHeightDiff - pixelHeightDiff ) > 100 ){
-                            	String msg = "H";
+                                String msg = "H";
                                 result = new PluginResult(PluginResult.Status.OK, msg);
                                 result.setKeepCallback(true);
                                 callbackContext.sendPluginResult(result);
                             }
                             previousHeightDiff = pixelHeightDiff;
-                         }
+                        }
                     };
 
                     rootView.getViewTreeObserver().addOnGlobalLayoutListener(list);
