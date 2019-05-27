@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/ionic-team/cordova-plugin-ionic-keyboard.git"
+    "url": "https://github.com/SamDV-ich/cordova-plugin-ionic-keyboard-fixed"
   },
   "keywords": [
     "cordova",
@@ -18,12 +18,12 @@
     "cordova-ios",
     "cordova-android"
   ],
-  "author": "Apache Software Foundation",
+  "author": "SamDV-ich",
   "license": "Apache 2.0",
   "bugs": {
-    "url": "https://github.com/ionic-team/cordova-plugin-ionic-keyboard/issues"
+    "url": "https://github.com/SamDV-ich/cordova-plugin-ionic-keyboard-fixed/issues"
   },
-  "homepage": "https://github.com/ionic-team/cordova-plugin-ionic-keyboard#readme",
+  "homepage": "https://github.com/SamDV-ich/cordova-plugin-ionic-keyboard-fixed#readme",
   "devDependencies": {
     "np": "^2.16.0",
     "sync-cordova-xml": "^0.4.0"

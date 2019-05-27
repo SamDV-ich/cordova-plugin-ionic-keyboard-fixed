@@ -7,7 +7,7 @@
     <keywords>cordova,keyboard,ecosystem:cordova,cordova-ios,cordova-android</keywords>
     <repo>https://github.com/SamDV-ich/cordova-plugin-ionic-keyboard-fixed</repo>
     <issue>https://github.com/SamDV-ich/cordova-plugin-ionic-keyboard-fixed/issues</issue>
-    <author>Apache Software Foundation</author>
+    <author>SamDV-ich</author>
 
     <engines>
 	    <engine name="cordova" version=">=3.2.0"/>
